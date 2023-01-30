@@ -17,32 +17,7 @@ public class Main {
     }
 }
 class Cipher {
-
-    /**
-     * Encryption by reflection of alphabets: a to z and z to a...
-     * @param inputText
-     * @return
-     */
-    public static String Encrypter(String inputText) {
-        char[] listOfChars = new char[inputText.length()];
-        String regex = "[a-z]";
-        String str = "";
-        for (int i = 0; i < inputText.length(); i++) {
-            str += inputText.charAt(i);
-            if (str.matches(regex)) {
-                int step = inputText.charAt(i) - 97;
-                int var = 122 - step;
-                listOfChars[i] = (char) var;
-                str = "";
-            } else {
-                listOfChars[i] = inputText.charAt(i);
-                str = "";
-            }
-        }
-
-        return String.valueOf(listOfChars);
-    }
-
+    
     /**
      * encrypting by shifting using a key
      * @param inputText
