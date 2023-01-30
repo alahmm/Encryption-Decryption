@@ -5,10 +5,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String inputText = scanner.nextLine();
+        String function = scanner.nextLine();
+        String message = scanner.nextLine();
         int key = scanner.nextInt();
-        inputText = inputText.toLowerCase();
-        System.out.println(Cipher.ShiferEncrypter(inputText, key));
+        if (function.equals("enc")) {
+            System.out.println(Cipher.EncrypterByShifting(message, key));
+        } else if (function.equals("dec")) {
+            System.out.println(Cipher.DecrypterByShifting(message, key));
+        }
+
     }
 }
 class Cipher {
@@ -43,28 +48,20 @@ class Cipher {
      * @param inputText
      * @return
      */
-    public static String ShiferEncrypter(String inputText, int key) {
+    public static String EncrypterByShifting(String inputText, int key) {
         char[] listOfChars = new char[inputText.length()];
-        String regex = "[a-z]";
-        String str = "";
         for (int i = 0; i < inputText.length(); i ++) {
-            str += inputText.charAt(i);
-            if (str.matches(regex)) {
-                if (inputText.charAt(i) + key <= 122) {
                     int step = inputText.charAt(i) + key;
                     listOfChars[i] = (char) step;
-                } else {
-                    int step1 = inputText.charAt(i) + key - 122;
-                    int step2 = 97 + step1 - 1;
-                    listOfChars[i] = (char) step2;
                 }
-                str = "";
-            } else {
-                listOfChars[i] = inputText.charAt(i);
-                str = "";
-            }
+        return String.valueOf(listOfChars);
+    }
+    public static String DecrypterByShifting(String inputText, int key) {
+        char[] listOfChars = new char[inputText.length()];
+        for (int i = 0; i < inputText.length(); i ++) {
+            int step = inputText.charAt(i) - key;
+            listOfChars[i] = (char) step;
         }
-
         return String.valueOf(listOfChars);
     }
 }
